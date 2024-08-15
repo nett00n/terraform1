@@ -1,0 +1,31 @@
+---
+name: Deploy GO function
+run-name: Deploy GO function. ${{ github.event.inputs.environment }}
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        type: string
+        default: "dev"
+
+env:
+  ENVIRONMENT: ${{ inputs.environment }}
+  TERRAFORM_WORKFLOW_ENVIRONMENT_KEY: TERRAFORM_WORKFLOW_ENVIRONMENT_VALUE
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: SHOW variables
+        shell: bash
+        run: |
+          echo ENVIRONMENT: "${ENVIRONMENT}"
+          echo TERRAFORM_WORKFLOW_ENVIRONMENT_KEY: "${TERRAFORM_WORKFLOW_ENVIRONMENT_KEY}"
+          echo TERRAFORM_ACTION_SECRET_KEY: "${TERRAFORM_ACTION_SECRET_KEY}"
+          echo TERRAFORM_ACTION_VARIABLE_KEY: "${TERRAFORM_ACTION_VARIABLE_KEY}"
+          echo APP_ACTION_VARIABLE_KEY: "${APP_ACTION_VARIABLE_KEY}"
+          echo APP_ACTION_SECRET_KEY: "${APP_ACTION_SECRET_KEY}"
