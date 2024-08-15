@@ -26,7 +26,7 @@ jobs:
   deploy:
     env:
       DEPLOYER_ACTION_SECRET_KEY: ${{ secrets.DEPLOYER_ACTION_SECRET_KEY }}
-      # DEPLOYER_ACTION_VARIABLE_KEY: ${{ vars.DEPLOYER_ACTION_VARIABLE_KEY }}
+      DEPLOYER_ACTION_VARIABLE_KEY: ${{ vars.DEPLOYER_ACTION_VARIABLE_KEY }}
       APP1_ACTION_SECRET_KEY: ${{ github.event.inputs.APP1_ACTION_SECRET_KEY }}
       APP1_ACTION_VARIABLE_KEY: ${{ github.event.inputs.APP1_ACTION_VARIABLE_KEY }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
