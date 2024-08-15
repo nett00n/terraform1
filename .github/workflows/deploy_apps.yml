@@ -11,19 +11,25 @@ on:
         type: string
         default: "dev"
       APP1_ACTION_SECRET_KEY:
+        description: 'Secret key for App1'
         type: string
+        required: true
+        default: ''
       APP1_ACTION_VARIABLE_KEY:
+        description: 'Variable key for App1'
         type: string
+        required: true
+        default: ''
 
-env:
-  DEPLOYER_ACTION_SECRET_KEY: ${{ secrets.DEPLOYER_ACTION_SECRET_KEY }}
-  DEPLOYER_ACTION_VARIABLE_KEY: ${{ vars.DEPLOYER_ACTION_VARIABLE_KEY }}
-  APP1_ACTION_SECRET_KEY: ${{ github.event.inputs.environment}}
-  APP1_ACTION_VARIABLE_KEY: ${{ github.event.inputs.APP1_ACTION_SECRET_KEY}}
-  ENVIRONMENT: ${{ github.event.inputs.APP1_ACTION_VARIABLE_KEY}}
 
 jobs:
   deploy:
+    env:
+      DEPLOYER_ACTION_SECRET_KEY: ${{ secrets.DEPLOYER_ACTION_SECRET_KEY }}
+      DEPLOYER_ACTION_VARIABLE_KEY: ${{ vars.DEPLOYER_ACTION_VARIABLE_KEY }}
+      APP1_ACTION_SECRET_KEY: ${{ github.event.inputs.APP1_ACTION_SECRET_KEY }}
+      APP1_ACTION_VARIABLE_KEY: ${{ github.event.inputs.APP1_ACTION_VARIABLE_KEY }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
