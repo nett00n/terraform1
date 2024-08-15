@@ -1,0 +1,37 @@
+---
+name: Deploy GO function
+run-name: Deploy GO function. ${{ github.event.inputs.environment }}
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        type: string
+        default: "dev"
+      APP1_ACTION_SECRET_KEY:
+        type: string
+      APP1_ACTION_VARIABLE_KEY:
+        type: string
+
+env:
+  DEPLOYER_ACTION_SECRET_KEY: ${{ secrets.DEPLOYER_ACTION_SECRET_KEY }}
+  DEPLOYER_ACTION_VARIABLE_KEY: ${{ vars.DEPLOYER_ACTION_VARIABLE_KEY }}
+  APP1_ACTION_SECRET_KEY: ${{ github.event.inputs.environment}}
+  APP1_ACTION_VARIABLE_KEY: ${{ github.event.inputs.APP1_ACTION_SECRET_KEY}}
+  ENVIRONMENT: ${{ github.event.inputs.APP1_ACTION_VARIABLE_KEY}}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy Application
+        run: |
+          echo "Deploying with secret key: $DEPLOYER_ACTION_SECRET_KEY"
+          echo "Using variable key: $DEPLOYER_ACTION_VARIABLE_KEY"
+          echo "Deploying with secret key: $APP1_ACTION_SECRET_KEY"
+          echo "Using variable key: $APP1_ACTION_VARIABLE_KEY"
