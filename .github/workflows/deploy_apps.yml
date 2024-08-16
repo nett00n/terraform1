@@ -25,5 +25,9 @@ jobs:
           echo "APP_NAME=${{ github.event.inputs.app-name }}" # >> $GITHUB_ENV
           echo "APP_TYPE=${{ github.event.inputs.app-type }}" # >> $GITHUB_ENV
           echo "ENVIRONMENT=${{ github.event.inputs.environment }}" # >> $GITHUB_ENV
-          echo "DEPLOY_LOGIN=${{ secrets.DEPLOY_LOGIN }}" # >> $GITHUB_ENV
-          echo "DEPLOY_TOKEN=${{ secrets.DEPLOY_TOKEN }}" # >> $GITHUB_ENV
+          echo "TERRAFORM_ACTION_SECRET_KEY=${{ secrets.TERRAFORM_ACTION_SECRET_KEY }}" # >> $GITHUB_ENV
+          echo "TERRAFORM_ACTION_VARIABLE_KEY=${{ secrets.TERRAFORM_ACTION_VARIABLE_KEY }}" # >> $GITHUB_ENV
+      - name: debug
+        run: |
+          pwd
+          find .
