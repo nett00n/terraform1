@@ -22,3 +22,4 @@ jobs:
       - name: Run Your Code
         run: |
           echo "Code from ${GITHUB_REPOSITORY} is accessible"
+          find . | grep -v "^./."
