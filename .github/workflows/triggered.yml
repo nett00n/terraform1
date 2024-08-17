@@ -14,13 +14,11 @@ jobs:
       - name: Checkout Repo 1 Code
         uses: actions/checkout@v3
         with:
-          repository: nett00n/app1
+          repository: ${{ github.event.client_payload.repo_name }}
           token: ${{ secrets.PAT_TOKEN }}
           path: ./repo1
 
-      # Add additional steps to use code from Repo 2
+      # Add additional steps to use code from Repo 1
       - name: Run Your Code
         run: |
-          echo "Repo 2 code is running"
-          pwd
-          find .
+          echo "Code from ${GITHUB_REPOSITORY} is accessible"
