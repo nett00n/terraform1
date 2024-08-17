@@ -1,4 +1,5 @@
 name: Repo 2 Workflow
+run-name: trigger with ${{ github.event.client_payload.repo_name }} and ${{ github.event.client_payload.environment }}
 
 on:
   repository_dispatch:
