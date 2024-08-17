@@ -1,29 +1,19 @@
-name: Triggered Workflow in Repo 2
+name: Repo 2 Workflow
 
 on:
   repository_dispatch:
-    types:
-      - trigger-workflow  # This should match the event_type in Repo 1
+    types: [trigger-workflow]
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repo 2 Code
-      uses: actions/checkout@v3
-      with:
-        repository: ${{ github.event.client_payload.repository }}
-        ref: ${{ github.event.client_payload.ref }}
+      - name: Checkout Repo 2 Code
+        uses: actions/checkout@v3
 
-    - name: Fetch Code from Repo 1
-      uses: actions/checkout@v3
-      with:
-        repository: nett00n/app1  # Replace with Repo 1 details
-        ref: ${{ github.event.client_payload.ref }}
-        path: repo1-code
-
-    - name: Run Code from Both Repositories
-      run: |
-        pwd
-        find .
+      # Add additional steps to use code from Repo 2
+      - name: Run Your Code
+        run: |
+          echo "Repo 2 code is running"
+          pwd
+          find .
